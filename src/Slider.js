@@ -14,8 +14,15 @@ import {
   Easing
 } from "react-native";
 
-const shallowCompare = require('react-addons-shallow-compare'),
-      styleEqual = require('style-equal');
+var shallowEqual = require('fbjs/lib/shallowEqual');
+
+function shallowCompare(instance, nextProps, nextState) {
+  return (
+    !shallowEqual(instance.props, nextProps) ||
+    !shallowEqual(instance.state, nextState)
+  );
+}
+var styleEqual = require('style-equal');
 
 var TRACK_SIZE = 4;
 var THUMB_SIZE = 20;
